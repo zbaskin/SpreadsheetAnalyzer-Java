@@ -78,15 +78,10 @@ class Analyzer {
         for(int i = 0; i < denominations.length; i++) {
           denominations[i] = Integer.parseInt(list.get(i + 1));
         }
-        System.out.println("The Coins Array: ");
+        System.out.println("Denominations: ");
         printArray(denominations);
         System.out.println("Solution: " + change(denominations, n) + " ways to make " + n);
       }
-      /*int denoms[] = {10, 1, 5};
-      int n = Integer.parseInt(args[0]);
-      System.out.println("The Coins Array: ");
-      printArray(denoms);
-      System.out.println("Solution: " + change(denoms, n) + " ways to make " + args[0]);*/
     }
   }
 }
