@@ -1,6 +1,7 @@
-class Analyzer {
+import java.io.*;
+import java.util.*;
 
-  //static final int INFINITY = 1000000;
+class Analyzer {
 
   public static int min(int x, int y) {
     if (x < y) {
@@ -10,21 +11,22 @@ class Analyzer {
   }
 
   public static int change(int denominations[], int n) {
+
     int[] temp = new int[n + 1];
     temp[0] = 1;
 
     for (int i = 0; i < denominations.length; i++) {
-      //int minimum = INFINITY;
 
       for (int j = 0; j < temp.length; j++) {
-        if ( /*(j < denominations.length) &&*/ (j >= denominations[i]) ) {
+        if (j >= denominations[i]) {
           temp[j] += temp[j - denominations[i]];
         }
       }
 
-      //temp[i] = minimum;
     }
+
     return temp[n];
+
   }
 
   static void printArray(int denominations[]) {
@@ -36,18 +38,55 @@ class Analyzer {
     System.out.println(" ]");
   }
 
+  public static ArrayList<List<String>> read(String csv) {
+    String delimiter = ",";
+    ArrayList<List<String>> masterList = new ArrayList<List<String>>();
+
+    try {
+      File file = new File(csv);
+      FileReader fr = new FileReader(file);
+      BufferedReader br = new BufferedReader(fr);
+      String line = "";
+      String[] array;
+
+      while ((line = br.readLine()) != null) {
+        ArrayList<String> list = new ArrayList<String>();
+        array = line.split(delimiter);
+        for (String str : array) {
+          list.add(str.trim());
+        }
+
+        masterList.add(list);
+
+      }
+      br.close();
+    } catch(IOException e) {
+      e.printStackTrace();
+    }
+
+    return masterList;
+  }
+
   public static void main(String[] args) {
     if (args.length != 1) {
-      System.out.println("Please include one number.");
+      System.out.println("Please include a file to read.");
     } else {
-      int denoms[] = {1, 5, 10};
+      ArrayList<List<String>> csv = read(args[0]);
+      for(List<String> list : csv) {
+        int n = Integer.parseInt(list.get(0));
+        int[] denominations = new int[list.size() - 1];
+        for(int i = 0; i < denominations.length; i++) {
+          denominations[i] = Integer.parseInt(list.get(i + 1));
+        }
+        System.out.println("The Coins Array: ");
+        printArray(denominations);
+        System.out.println("Solution: " + change(denominations, n) + " ways to make " + n);
+      }
+      /*int denoms[] = {10, 1, 5};
       int n = Integer.parseInt(args[0]);
-      //int k = Integer.parseInt(args[1]);
-      System.out.print("The Coins Array: ");
+      System.out.println("The Coins Array: ");
       printArray(denoms);
-
-      System.out.print("Solution: ");
-      System.out.println(change( denoms, n ));
+      System.out.println("Solution: " + change(denoms, n) + " ways to make " + args[0]);*/
     }
   }
 }
