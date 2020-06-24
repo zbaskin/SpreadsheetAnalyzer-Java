@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+import java.util.stream.*;
 
 class Analyzer {
 
@@ -67,6 +68,8 @@ class Analyzer {
     return masterList;
   }
 
+
+
   public static void main(String[] args) {
     if (args.length != 1) {
       System.out.println("Please include a file to read.");
@@ -78,7 +81,9 @@ class Analyzer {
         for(int i = 0; i < denominations.length; i++) {
           denominations[i] = Integer.parseInt(list.get(i + 1));
         }
-        System.out.println("Denominations: ");
+        //int[] out = new int[n];
+        //Combinations.recur(denominations, 1, n, out, 0);
+        System.out.print("\nDenominations: ");
         printArray(denominations);
         System.out.println("Solution: " + change(denominations, n) + " ways to make " + n);
       }
