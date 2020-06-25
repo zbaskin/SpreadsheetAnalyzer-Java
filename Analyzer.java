@@ -52,13 +52,16 @@ class Analyzer {
         for (String str : array) {
           list.add(str.trim());
         }
-
         masterList.add(list);
-
       }
       br.close();
     } catch(IOException e) {
-      e.printStackTrace();
+      System.out.println("Please enter a correct file.");
+      Scanner scan = new Scanner(System.in);
+      String[] args = new String[1];
+      String file = scan.nextLine();
+      args[0] = file;
+      main(args);
     }
     return masterList;
   }
@@ -71,15 +74,17 @@ class Analyzer {
     } else {
       ArrayList<List<String>> csv = read(args[0]);
       for(List<String> list : csv) {
-        int n = Integer.parseInt(list.get(0));
-        int[] denominations = new int[list.size() - 1];
-        for(int i = 0; i < denominations.length; i++) {
-          denominations[i] = Integer.parseInt(list.get(i + 1));
+        if (!list.get(0).equals("")) {
+          int n = Integer.parseInt(list.get(0));
+          int[] denominations = new int[list.size() - 1];
+          for(int i = 0; i < denominations.length; i++) {
+            denominations[i] = Integer.parseInt(list.get(i + 1));
+          }
+          //Combinations.printCombinations(denominations, n);
+          System.out.print("\nDenominations: ");
+          printArray(denominations);
+          System.out.println("Solution: " + change(denominations, n) + " ways to make " + n);
         }
-        //Combinations.printCombinations(denominations, n);
-        System.out.print("\nDenominations: ");
-        printArray(denominations);
-        System.out.println("Solution: " + change(denominations, n) + " ways to make " + n);
       }
     }
   }
