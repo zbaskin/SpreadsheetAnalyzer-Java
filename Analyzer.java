@@ -12,7 +12,6 @@ class Analyzer {
   }
 
   public static int change(int denominations[], int n) {
-
     int[] temp = new int[n + 1];
     temp[0] = 1;
 
@@ -25,9 +24,7 @@ class Analyzer {
       }
 
     }
-
     return temp[n];
-
   }
 
   static void printArray(int denominations[]) {
@@ -42,7 +39,6 @@ class Analyzer {
   public static ArrayList<List<String>> read(String csv) {
     String delimiter = ",";
     ArrayList<List<String>> masterList = new ArrayList<List<String>>();
-
     try {
       File file = new File(csv);
       FileReader fr = new FileReader(file);
@@ -64,7 +60,6 @@ class Analyzer {
     } catch(IOException e) {
       e.printStackTrace();
     }
-
     return masterList;
   }
 
@@ -81,8 +76,7 @@ class Analyzer {
         for(int i = 0; i < denominations.length; i++) {
           denominations[i] = Integer.parseInt(list.get(i + 1));
         }
-        //int[] out = new int[n];
-        //Combinations.recur(denominations, 1, n, out, 0);
+        //Combinations.printCombinations(denominations, n);
         System.out.print("\nDenominations: ");
         printArray(denominations);
         System.out.println("Solution: " + change(denominations, n) + " ways to make " + n);
