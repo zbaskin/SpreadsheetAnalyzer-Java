@@ -8,13 +8,11 @@ class Combinations {
       System.out.println(Arrays.stream(out).limit(index).boxed().collect(Collectors.toList()));
     }
 
-    for (int j = denoms[i % denoms.length]; j <= n; j += 1) {// denoms[index % denoms.length]) {
+    for (int j = i; j <= n; j++) {
       out[index] = j;
       recur(denoms, j, n - j, out, index + 1);
     }
   }
-  
-  //account for incorrect file in CLI
 
   public static void printCombinations(int[] denominations, int n) {
     int[] out = new int[n];

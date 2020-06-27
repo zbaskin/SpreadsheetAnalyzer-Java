@@ -14,15 +14,12 @@ class Analyzer {
   public static int change(int denominations[], int n) {
     int[] temp = new int[n + 1];
     temp[0] = 1;
-
     for (int i = 0; i < denominations.length; i++) {
-
       for (int j = 0; j < temp.length; j++) {
         if (j >= denominations[i]) {
           temp[j] += temp[j - denominations[i]];
         }
       }
-
     }
     return temp[n];
   }
